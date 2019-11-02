@@ -1,0 +1,4 @@
+<h3><%= @list.name %></h3>
+<% @list.movies.each do |movie| %>
+  <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
+<% end %>

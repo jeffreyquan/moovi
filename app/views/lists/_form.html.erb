@@ -1,0 +1,12 @@
+<%= form_for @list do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :private, "Only Me" %>
+  <%= f.radio_button :private, true, :checked => true %>
+  <%= f.label :private, "Share with Everyone" %>
+  <%= f.radio_button :private, false, :checked => false %>
+  <%= f.label :movie_ids %>
+  <%= f.select :movie_ids, Movie.pluck(:title, :id), :include_blank => true, :multiple => true %>
+
+  <%= f.submit %>
+<% end %>

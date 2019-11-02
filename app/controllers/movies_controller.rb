@@ -21,11 +21,6 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find params[:id]
-    duration = @movie.duration
-    if duration / 60 != 0
-      @hours = duration / 60
-    end
-    @minutes = duration % 60
   end
 
   private

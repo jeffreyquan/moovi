@@ -10,10 +10,9 @@
       <li>Director: <%= link_to @movie.director.name, @movie.director %></li>
       <li>Year: <%= @movie.year %></li>
       <li>Rate: <%= @movie.classification %></li>
-      <li>Duration: <%= @hours if @hours.present? %>h <%= @minutes if @minutes.present? %>min</li>
+      <li>Duration: <%= @movie.duration %></li>
     </ul>
   </div>
-
 </div>
 
 <div class="other-movies-by-director">
