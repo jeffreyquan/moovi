@@ -1,0 +1,10 @@
+<%= form_for @user do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_fied :name, :required => true, :autofocus => true %>
+  <%= f.label :username %>
+  <%= f.text_field :username, :required => true %>
+  <%= f.label :email %>
+  <%= f.email_field :email, :required => true %>
+  <%= f.submit %>
+<% end %>

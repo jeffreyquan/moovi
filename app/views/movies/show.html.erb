@@ -1,2 +1,26 @@
-<h1>Movies#show</h1>
-<p>Find me in app/views/movies/show.html.erb</p>
+<h2><%= @movie.title %></h2>
+
+<div class="movie-profile">
+  <%= image_tag @movie.image, :class => 'feature', :alt => @movie.title if @movie.image.present? %>
+
+  <div class="movie-info">
+    <h3>Overview</h3>
+    <p><%= @movie.overview %></p>
+    <ul>
+      <li>Director: <%= link_to @movie.director.name, @movie.director %></li>
+      <li>Year: <%= @movie.year %></li>
+      <li>Rate: <%= @movie.classification %></li>
+      <li>Duration: <%= @hours if @hours.present? %>h <%= @minutes if @minutes.present? %>min</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="other-movies-by-director">
+  <h3>Other movies by <%= @movie.director.name %></h3>
+  <% @movie.director.movies.each do |movie| %>
+    <% if movie.image.present? && movie.id != @movie.id %>
+      <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie  %>
+    <% end %>
+  <% end %>
+</div>

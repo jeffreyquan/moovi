@@ -95,11 +95,11 @@ m56 = Movie.create :title => "Iron Man 2", :year => 2010, :overview => "With the
 puts "#{ Movie.count } movies created."
 
 List.destroy_all
-l1 = List.create :name => "Favourites", :user_id => 1
-l2 = List.create :name => "Watched", :user_id => 1
-l3 = List.create :name => "To Watch", :user_id => 1
-l4 = List.create :name => "My Faves", :user_id => 2
-l5 = List.create :name => "Awesome Movies", :user_id => 3
+l1 = List.create :name => "Favourites", :user_id => 1, :private => true
+l2 = List.create :name => "Watched", :user_id => 1, :private => true
+l3 = List.create :name => "To Watch", :user_id => 1, :private => true
+l4 = List.create :name => "My Faves", :user_id => 2, :private => true
+l5 = List.create :name => "Awesome Movies", :user_id => 3, :private => true
 puts "#{ List.count } lists created."
 
 # Associations #################################################################

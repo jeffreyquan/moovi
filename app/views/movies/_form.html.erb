@@ -1,0 +1,18 @@
+<%= form_for @movie do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :name, :required => true, :autofocus => true %>
+  <%= f.label :year %>
+  <%= f.integer :year %>
+  <%= f.label :overview %>
+  <%= f.text_field :overview %>
+  <%= f.label :duration %>
+  <%= f.integer :duration %>
+  <%= f.label :image %>
+  <%= f.url_field :image %>
+  <%= f.label :imdb_id %>
+  <%= f.text :imdb_id %>
+  <%= f.integer :tmdb_id %>
+  <%= f.select :director_id, Director.pluck(:name, :id), include_black => true %>
+  <%= f.submit %>
+
+<% end %>

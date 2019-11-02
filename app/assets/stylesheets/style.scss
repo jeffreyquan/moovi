@@ -1,0 +1,53 @@
+
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100rem;
+  margin: 0 auto;
+}
+
+.main-nav {
+  padding: 1rem;
+  width: 100rem;
+  background-color: rgba(0,0,0,0.8);
+
+  ul {
+    list-style: none;
+    text-align: right;
+
+    li {
+      display: inline-block;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+
+}
+
+.feature {
+  height: 45rem;
+}
+
+.thumb {
+  height: 25rem;
+}
