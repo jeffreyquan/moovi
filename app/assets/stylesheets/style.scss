@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-  width: 100rem;
+  max-width: 100rem;
   margin: 0 auto;
 }
 
@@ -34,6 +34,10 @@ body {
 
     li {
       display: inline-block;
+
+      // &:nth-last-child(-n+2) {
+      //   float: right;
+      // }
 
       a {
         text-decoration: none;

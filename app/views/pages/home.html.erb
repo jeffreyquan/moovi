@@ -4,7 +4,7 @@
   <h2>Welcome <%= @current_user.username %></h2>
   <div class="list-main">
   <% @current_user.lists.each do |list| %>
-  <% if list.movies.present? %>
+    <% if list.movies.present? %>
     <div class="movie-list">
       <h3><%= link_to list.name, list_path(list) %></h3>
       <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
@@ -12,9 +12,11 @@
         <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
       <% end %>
     <% end %>
-  <% end %>
+<% end %>
   <% @current_user.lists.each do |list| %>
-    <h3><%= link_to list.name, list_path(list) if list.movies.empty? || list.movies.nil? %></h3>
-    <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+    <% if list.movies.empty? || list.movies.nil? %>
+      <h3><%= link_to list.name, list_path(list) %></h3>
+      <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+    <% end %>
   <% end %>
 <% end %>

@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :check_for_admin, :only => [:new, :edit, :update]
+  before_action :check_for_admin, :only => [:new]
 
   def index
     @movies = Movie.all
@@ -25,6 +25,6 @@ class MoviesController < ApplicationController
 
   private
   def movie_params
-    params.require(:movie).permit(:title, :year, :overview, :classification, :duration, :image, :director_id)
+    params.require(:movie).permit(:title, :year, :overview, :classification, :duration, :image, :director_id, :list_ids => [])
   end
 end

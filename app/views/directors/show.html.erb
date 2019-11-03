@@ -1,2 +1,18 @@
-<h1>Directors#show</h1>
-<p>Find me in app/views/directors/show.html.erb</p>
+<h1><%= @director.name %></h1>
+  <div class="director-profile">
+    <%= image_tag @director.image, :class => 'feature', :alt => @director.name if @director.image.present? %>
+
+    <div clas="director-info">
+      <p>Date of birth: <%= @director.dob.strftime '%e %B, %Y' %></p>
+      <p>Place of birth: <%= @director.pob %></p>
+    </div>
+
+    <div class="movies-by-director">
+      <h3>Movies by <%= @director.name %></h3>
+      <% @director.movies.each do |movie| %>
+        <% if movie.image.present? %>
+          <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie  %>
+        <% end %>
+      <% end %>
+    </div>
+</div>

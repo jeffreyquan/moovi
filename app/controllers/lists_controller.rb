@@ -1,9 +1,6 @@
 class ListsController < ApplicationController
   before_action :check_for_login, :only => [:create, :new, :edit]
 
-  def add
-
-  end
 
   def index
     @lists = List.where(:private => false)
@@ -46,6 +43,6 @@ class ListsController < ApplicationController
 
   private
   def list_params
-    params.require(:list).permit(:name, :private, :movie_id)
+    params.require(:list).permit(:name, :private, :movie_ids => [])
   end
 end

@@ -1,2 +1,5 @@
-<h1>Genres#show</h1>
-<p>Find me in app/views/genres/show.html.erb</p>
+<h1><%= @genre.name %></h1>
+
+<% @genre.movies.each do |movie| %>
+  <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
+<% end %>

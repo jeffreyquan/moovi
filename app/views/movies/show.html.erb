@@ -15,6 +15,9 @@
   </div>
 </div>
 
+<%= render :partial => 'form_add_movie_to_list' %>
+
+
 <div class="other-movies-by-director">
   <h3>Other movies by <%= @movie.director.name %></h3>
   <% @movie.director.movies.each do |movie| %>

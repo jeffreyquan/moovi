@@ -1,12 +1,21 @@
 <%= form_for @list do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :private, "Only Me" %>
-  <%= f.radio_button :private, true, :checked => true %>
-  <%= f.label :private, "Share with Everyone" %>
-  <%= f.radio_button :private, false, :checked => false %>
-  <%= f.label :movie_ids %>
-  <%= f.select :movie_ids, Movie.pluck(:title, :id), :include_blank => true, :multiple => true %>
-
+  <% if @current_user.present? %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :private, "Only Me" %>
+    <%= f.radio_button :private, true, :checked => true %>
+    <%= f.label :private, "Share with Everyone" %>
+    <%= f.radio_button :private, false, :checked => false %>
+    <%= hidden_field_tag "list[movie_ids][]", nil %>
+    <% @list.movies.each do |movie| %>
+    <div class="checkbox-list">
+      <div class="checkbox-image">
+        <%= label_tag dom_id(movie), image_tag(movie.image, :class => 'thumb', :alt => movie.title) %>
+      </div>
+      <%= check_box_tag "list[movie_ids][]", movie.id, @list.movie_ids.include?(movie.id), id: dom_id(movie) %>
+      <%= label_tag dom_id(movie), movie.title %>
+    </div>
+    <% end %>
   <%= f.submit %>
+  <% end %>
 <% end %>

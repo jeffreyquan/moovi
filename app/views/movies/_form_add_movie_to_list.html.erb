@@ -1,0 +1,10 @@
+<%= form_for @movie do |f| %>
+  <% if @current_user.present? %>
+    <%= hidden_field_tag "movie[list_ids][]", nil %>
+    <% @current_user.lists.all.each do |list| %>
+      <%= check_box_tag "movie[list_ids][]", list.id, @movie.list_ids.include?(list.id), id: dom_id(list) %>
+      <%= label_tag dom_id(list), list.name %><br>
+    <% end %>
+    <%= f.submit "Add to list" %>
+  <% end %>
+<% end %>
