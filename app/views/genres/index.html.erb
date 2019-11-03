@@ -1,7 +1,7 @@
 <h1>Genres</h1>
 
 <div class="genre-main">
-  <% @genres.each do |genre| %>
+  <% @genres.order('name').each do |genre| %>
     <div class="genre-list grid">
       <%= link_to genre.name, genre_path(genre) %>
       <div class="genre-movies hs">
