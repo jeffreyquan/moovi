@@ -5,7 +5,15 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :movies, :through => :reviews
 
-  validates :email, :presence => true, :uniqueness => true, :length => { :minimum => 5 }
-  validates :username, :presence => true, :uniqueness => true
-  validates :password, :presence => true, :length => { :minimum => 6, :too_short => "Password must be at least %{ count } characters long." } 
+  validates :email, :presence => true, :uniqueness => { :case_sensitive => false }, :length => { :minimum => 5 }
+  validates :username, :presence => true, :uniqueness => { :case_sensitive => false }, :format => { with: /\A[a-zA-Z0-9]+\Z/ }
+  validates :password, :presence => true, :length => { :minimum => 5, :maximum => 20 }
 end
+
+# class EmailValidator < ActiveModel::EachValidator
+#   def validate_each(record, attribute, value)
+#     unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+#       record.errors[attribute] << (options[:message] || "is not an email")
+#     end
+#   end
+# end

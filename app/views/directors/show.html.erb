@@ -8,10 +8,10 @@
     </div>
 
     <div class="movies-by-director">
-      <h3>Movies by <%= @director.name %></h3>
-      <% @director.movies.each do |movie| %>
-        <% if movie.image.present? %>
-          <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie  %>
+      <% if @director.movies.present? %>
+        <h3>Movies by <%= @director.name %></h3>
+        <% @director.movies.each do |movie| %>
+            <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie if movie.image.present? %>
         <% end %>
       <% end %>
     </div>

@@ -2,7 +2,7 @@
 <% @lists.each do |list| %>
   <% if list.movies.present? %>
     <div class="movie-list">
-      <h3><%= link_to list.name, list_path(list) %></h3>
+      <h3><%= list.name %> by <%= list.user.name %></h3>
       <% list.movies.each do |movie| %>
         <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
       <% end %>

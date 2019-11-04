@@ -1,4 +1,7 @@
 <h2><%= @movie.title %></h2>
+<% if @current_user.admin? %>
+  <%= link_to "Edit", edit_movie_path(@movie) %>
+<% end %>
 
 <div class="movie-profile">
   <%= image_tag @movie.image, :class => 'feature', :alt => @movie.title if @movie.image.present? %>
@@ -15,7 +18,11 @@
   </div>
 </div>
 
-<%= render :partial => 'form_add_movie_to_list' %>
+<% if @current_user.present? && @current_user.lists.present? %>
+  <%= render :partial => 'form_add_movie_to_list' %>
+<% else %>
+  <%= link_to "Sign in to add movie to list", login_path %>
+<% end %>
 
 
 <div class="other-movies-by-director">

@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :check_for_admin, :only => [:new]
+  before_action :check_for_admin, :only => [:new, :edit, :update, :create, :destroy]
 
   def index
     @movies = Movie.all
@@ -7,6 +7,11 @@ class MoviesController < ApplicationController
 
   def new
     @movie = Movie.new
+  end
+
+  def create
+    movie = Movie.create movie_params
+    redirect_to movie
   end
 
   def edit
