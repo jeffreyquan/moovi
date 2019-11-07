@@ -112,24 +112,26 @@ movies.each do |movie|
   url_for_credits = "https://api.themoviedb.org/3/movie/#{movie_tmdb_id}/credits?api_key=#{tmdb_key}"
   credits = HTTParty.get url_for_credits
   actor_credits = credits["cast"][0..19] if credits["cast"].present?
-  actor_credits.each do |actor|
-    actor_tmdb_id = actor["id"]
-    if Actor.find_by(:tmdb_id => actor_tmdb_id).present?
-      actor_to_add = Actor.find_by(:tmdb_id => actor_tmdb_id)
-      movie.actors << actor_to_add
-    else
-      url_for_actor_details = "https://api.themoviedb.org/3/person/#{actor_tmdb_id}?api_key=#{tmdb_key}&language=en-US"
-      actor_details = HTTParty.get url_for_actor_details
-      new_actor = Actor.new
-      new_actor.name = actor["name"] if actor["name"].present?
-      new_actor.dob = actor_details["birthday"] if actor_details["birthday"].present?
-      new_actor.pob = actor_details["place_of_birth"] if actor_details["place_of_birth"].present?
-      new_actor.imdb_id = actor_details["imdb_id"] if actor_details["imdb_id"].present?
-      new_actor.tmdb_id = actor_tmdb_id
-      new_actor.image = ("https://image.tmdb.org/t/p/w600_and_h900_bestv2" + actor_details["profile_path"]) if actor_details["profile_path"].present?
-      new_actor.save
-      actor_count += 1
-      movie.actors << new_actor
+  if actor_credits.present?
+    actor_credits.each do |actor|
+      actor_tmdb_id = actor["id"]
+      if Actor.find_by(:tmdb_id => actor_tmdb_id).present?
+        actor_to_add = Actor.find_by(:tmdb_id => actor_tmdb_id)
+        movie.actors << actor_to_add
+      else
+        url_for_actor_details = "https://api.themoviedb.org/3/person/#{actor_tmdb_id}?api_key=#{tmdb_key}&language=en-US"
+        actor_details = HTTParty.get url_for_actor_details
+        new_actor = Actor.new
+        new_actor.name = actor["name"] if actor["name"].present?
+        new_actor.dob = actor_details["birthday"] if actor_details["birthday"].present?
+        new_actor.pob = actor_details["place_of_birth"] if actor_details["place_of_birth"].present?
+        new_actor.imdb_id = actor_details["imdb_id"] if actor_details["imdb_id"].present?
+        new_actor.tmdb_id = actor_tmdb_id
+        new_actor.image = ("https://image.tmdb.org/t/p/w600_and_h900_bestv2" + actor_details["profile_path"]) if actor_details["profile_path"].present?
+        new_actor.save
+        actor_count += 1
+        movie.actors << new_actor
+      end
     end
   end
 end
