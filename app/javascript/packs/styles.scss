@@ -1,0 +1,310 @@
+@import '~bootstrap/scss/bootstrap';
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+  padding-right: 0px !important;
+  position: relative;
+}
+
+.fade {
+  padding-right: 0px !important;
+}
+
+.show {
+  padding-right: 0px !important;
+}
+
+ul {
+  list-style: none;
+}
+
+.modal-open {
+    overflow: inherit;
+}
+
+.navbar {
+  height: 10vh;
+  padding: 0.5rem 1rem !important;
+}
+
+.wrapper {
+  min-height: 100vh;
+  max-width: 100rem;
+  margin: 0 auto;
+  border: 0.1rem solid silver;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  font-size: 1.4rem;
+  padding: 1rem 0;
+}
+
+.fixed-top {
+  width: 100rem;
+  margin: 0 auto;
+}
+
+.main-wrapper {
+  margin-top: 10vh;
+  padding: 2rem 4rem 4rem 4rem;
+}
+
+.feature {
+  height: 45rem;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.thumb {
+  height: 26.6rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.thumb-result {
+  height: 26rem;
+  margin: 0.3rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.thumb-cast {
+  height: 26rem;
+  margin: 0.3rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.thumb-hero {
+  height: 17rem;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 1);
+}
+
+.thumb-cast-name {
+  text-align: center;
+
+  h5 {
+    font-weight: bold;
+  }
+
+}
+
+.list-title-main {
+  font-size: 1.4vw;
+}
+
+.list-title-secondary {
+  font-size: 1.2vw;
+  color: #e5e5e5;
+}
+
+.hero-poster {
+  padding-left: 0px;
+}
+
+iframe {
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.trailer {
+  padding-right: 0px;
+}
+
+.personal-info {
+  padding-left: 0px;
+  font-size: 1.2rem;
+}
+
+#movie-minor-info {
+  font-size: 1.2rem;
+}
+
+#plot {
+  font-size: 1.2rem;
+}
+
+#overview {
+  padding-left: 0px;
+}
+
+#top-billed-casts {
+  padding-left: 0px;
+}
+
+#top-casts-row {
+  display: flex;
+  padding-left: 15px;
+  justify-content: left;
+
+  .card {
+    text-align: center;
+    border: none;
+  }
+}
+
+.each-cast {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.minor-top-buffer {
+  margin-top: 1rem;
+}
+
+.top-buffer {
+  margin-top: 2rem;
+}
+
+.board, .hero {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tile {
+  position: relative;
+  margin: 0.3rem;
+
+  .photo-name {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 1.2rem;
+
+    a:link {
+      text-decoration: none;
+      color: white;
+    }
+
+    a:visited {
+      color: white;
+    }
+
+    a:active {
+      text-decoration: none;
+    }
+  }
+}
+
+
+.list-form-wrapper {
+  font-size: 1.2rem;
+}
+
+.list-form {
+  margin-top: 0.5rem;
+}
+
+label {
+  font-size: 1.2rem;
+}
+
+.form-group input {
+  font-size: 1.2rem;
+}
+
+.movie-photo-name {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  background-color: rgb(0,0,0);
+  opacity: 0;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.container p {
+  font-size: 1.2rem;
+}
+
+h1.hero {
+  font-size: 4rem;
+  color: rgb(229,9,20)
+}
+
+h1 {
+ font-size: 4rem;
+ color: #0f52ba;
+ text-shadow: 0.08rem 0.08rem #000;
+}
+
+.list a {
+  color: #0f52ba;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+span {
+  margin-right: 0.5rem;
+}
+
+h3 {
+  font-size: bold;
+}
+
+.search-number {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+}
+
+#movie-search-results {
+  display: flex;
+  padding-left: 0px;
+  justify-content: left;
+
+  .card {
+    text-align: center;
+    border: none;
+  }
+}
+
+.form-control {
+  font-size: 1.4rem;
+}
+
+.btn {
+  font-size: 1.4rem;
+}
+
+.no-list {
+  font-size: 1.2rem;
+}
+
+.add-link, .edit-link, .delete-link {
+  font-size: 1.2rem;
+}
+
+#message {
+  position: absolute;
+  background-color: white;
+  color: black;
+  font-size: 40px;
+  border: 1px solid green;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 100000;
+  display: none;
+  padding: 10px;
+  border-radius: 5px;
+}

@@ -1,18 +1,78 @@
-<h1><%= @director.name %></h1>
-  <div class="director-profile">
-    <%= image_tag @director.image, :class => 'feature', :alt => @director.name if @director.image.present? %>
+<div class="director-heading">
+  <h1><%= @director.name %>
+  <% if @current_user.present? && @current_user.admin? %>
+    <%= link_to "Edit", edit_director_path(@director)  %>
+    <%= link_to "Delete", @director, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+  <% end %>
+  </h1>
+</div>
 
-    <div clas="director-info">
-      <p>Date of birth: <%= @director.dob.strftime '%e %B, %Y' %></p>
-      <p>Place of birth: <%= @director.pob %></p>
+<div class="container director-profile">
+  <div class="row justify-content-between">
+    <div class="hero-poster col-12 col-md-4">
+      <%= image_tag @director.image, :class => 'feature', :alt => @director.name if @director.image.present? %>
     </div>
+    <div class="trailer col-12 col-md-8">
+      <iframe width="100%" height="450" src=<%= @embed_url %> frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
 
-    <div class="movies-by-director">
-      <% if @director.movies.present? %>
-        <h3>Movies by <%= @director.name %></h3>
-        <% @director.movies.each do |movie| %>
-            <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie if movie.image.present? %>
-        <% end %>
+<div class="container director-info">
+  <div class="row top-buffer">
+    <div class="personal-info col-12 col-md-4">
+      <% if @director.dob.present? %>
+      <p>
+        <strong>Date of birth:</strong>
+        <%= @director.dob.strftime '%e %B, %Y' %>
+      </p>
+      <% end %>
+      <% if @director.pob.present? %>
+      <p>
+        <strong>Place of birth:</strong>
+        <%= @director.pob %>
+      </p>
       <% end %>
     </div>
+    <div class="list col-12 col-md-4">
+      <% if @current_user.present? %>
+        <h3>Lists that this movie is in:</h3>
+        <% if @lists_director_is_in.nil? || @lists_director_is_in.empty? %>
+          <p>None</p>
+        <% else %>
+        <ul>
+          <% @lists_director_is_in.each do |list| %>
+            <li><%= list.name %></li>
+          <% end %>
+        <% end %>
+        </ul>
+        <% if @current_user.lists.where(:category => "Directors").present? && @current_user.lists.where(:category => "Directors").count > 0 %>
+          <div id="director-list-modal">
+          <%= render :partial => 'modal' %>
+          </div>
+        <% else %>
+          <div><%= link_to "Create list", new_list_path %></div>
+        <% end %>
+        <% else %>
+          <%= link_to "Sign in to add director to list", login_path %>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row top-buffer">
+  <div class="col-12">
+    <h3>Movies directed by <%= @director.name %></h3>
+      <div class="board">
+        <% if @director.movies.present? %>
+          <% @director.movies.each do |movie| %>
+            <div class="tile">
+              <div class="photo">
+                <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie if movie.image.present? %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
 </div>

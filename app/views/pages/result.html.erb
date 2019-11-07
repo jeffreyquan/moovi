@@ -1,0 +1,26 @@
+
+<h2>Results</h2>
+
+<%= link_to "Search Again", search_path, :class => "btn btn-outline-secondary" %>
+
+<% if !@tmdb_results.nil? %>
+   <p class="search-number"><strong>Found <%= pluralize @tmdb_results.count, "movie" %>.</strong></p>
+   <div class="container">
+     <div id="movie-search-results" class="row">
+        <% @tmdb_results.uniq.each do |movie| %>
+        <div class="card">
+          <%= image_tag "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie['poster_path'], :class => 'thumb-result', :alt => movie['title'] if movie['poster_path'].present? %>
+          <div class="card-body">
+            <h5><%= movie['title'] %> <%= movie['release_date'].to_date.strftime '%Y' if movie['release_date'].present? %>
+            </h5>
+            <p>
+              <%= link_to "Add movie", add_movie_path(movie["id"]), :class => "btn btn-outline-info" %>
+            </p>
+          </div>
+        </div>
+        <% end %>
+      </div>
+  <% else %>
+    <p>No movies were found.</p>
+<% end %>
+  </div>

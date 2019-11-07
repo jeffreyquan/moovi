@@ -1,0 +1,74 @@
+<div class="actor-heading">
+  <h1><%= @actor.name %>
+  <% if @current_user.present? && @current_user.admin? %>
+    <span><%= link_to "Edit", edit_actor_path(@actor) %></span>
+    <span><%= link_to "Delete", @actor, :method => 'delete', :data => { :confirm => 'Are you sure?' } %></span>
+  <% end %>
+  </h1>
+</div>
+
+<div class="container actor-profile">
+  <div class="row justify-content-between">
+    <div class="hero-poster col-12 col-md-4">
+      <%= image_tag @actor.image, :class => 'feature', :alt => @actor.name if @actor.image.present? %>
+    </div>
+    <div class="trailer col-12 col-md-8">
+      <iframe width="100%" height="450" src=<%= @embed_url %> frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="container actor-info">
+  <div class="row top-buffer">
+    <div class="personal-info col-12 col-md-4">
+      <% if @actor.dob.present? %>
+      <p>
+        <strong>Date of birth:</strong>
+        <%= @actor.dob.strftime '%e %B, %Y' %>
+      </p>
+      <% end %>
+      <% if @actor.pob.present? %>
+      <p>
+        <strong>Place of birth:</strong>
+        <%= @actor.pob %>
+      </p>
+      <% end %>
+    </div>
+    <div class="list col-12 col-md-4">
+      <% if @current_user.present? %>
+        <h3>Lists that this movie is in:</h3>
+        <% if @lists_actor_is_in.nil? || @lists_actor_is_in.empty? %>
+          <p>None</p>
+        <% else %>
+        <ul>
+          <% @lists_actor_is_in.each do |list| %>
+            <li><%= list.name %></li>
+          <% end %>
+        <% end %>
+        </ul>
+        <div id="actor-list-modal">
+          <%= render :partial => 'modal' %>
+        </div>
+        <% else %>
+          <%= link_to "Sign in to add actor to list", login_path %>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row top-buffer">
+  <div class="col-12">
+    <h3>Movies starring <%= @actor.name %></h3>
+      <div class="board">
+        <% if @actor.movies.present? %>
+          <% @actor.movies.each do |movie| %>
+            <div class="tile">
+              <div class="photo">
+                <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie if movie.image.present? %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+</div>

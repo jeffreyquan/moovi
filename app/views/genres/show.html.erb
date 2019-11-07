@@ -1,4 +1,8 @@
-<h1><%= @genre.name %></h1>
+<div class="genre-heading">
+  <h1><%= @genre.name %></h1>
+  <%= link_to "Edit", edit_genre_path(@genre) if @current_user.present? && @current_user.admin? %>
+</div>
+
 
 <% @genre.movies.each do |movie| %>
   <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>

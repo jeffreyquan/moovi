@@ -1,0 +1,34 @@
+<% if @current_user.present? %>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-movie-modal">
+  Update lists
+  </button>
+<% end %>
+
+<%= form_for @movie do |f| %>
+<div class="modal fade" id="add-movie-modal" tabindex="-1" role="dialog" aria-labelledby="add-movie-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-movie-modal">Add movie to selected lists:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <% if @current_user.present? %>
+            <%= hidden_field_tag "movie[list_ids][]", nil %>
+            <% @current_user.lists.where(:category => 'Movies').all.each do |list| %>
+              <%= check_box_tag "movie[list_ids][]", list.id, @movie.list_ids.include?(list.id), id: dom_id(list) %>
+              <%= label_tag dom_id(list), list.name %><br>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= f.submit "Save", :class => 'btn btn-secondary', :id => 'save-btn-movie' %>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <% end %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>

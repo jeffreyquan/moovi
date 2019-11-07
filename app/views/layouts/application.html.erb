@@ -1,40 +1,68 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GA Movie Hub</title>
+    <title>Moovi</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
   </head>
 
   <body>
-    <div class="container">
-      <header>
-        <nav class="main-nav">
-          <ul>
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "Movies", movies_path %></li>
-            <li><%= link_to "Genres", genres_path %></li>
-            <li><%= link_to "Directors", directors_path %></li>
-            <li><%= link_to "All Lists", lists_path %></li>
+    <div id="message">
+    </div>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+          <a class="navbar-brand" href="/">Moovi</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item"><%= link_to "Home", root_path, :class => "nav-link" %></li>
+              <li class="nav-item"><%= link_to 'Movies', movies_path, :class => "nav-link" %></li>
+              <li class="nav-item"><%= link_to "Genres", genres_path, :class => "nav-link" %></li>
+              <li class="nav-item"><%= link_to "Actors", actors_path, :class => "nav-link" %></li>
+              <li class="nav-item"><%= link_to "Directors", directors_path, :class => "nav-link" %></li>
+              <li class="nav-item"><%= link_to "Lists", lists_path, :class => "nav-link" %></li>
+              <% if @current_user.present? %>
+                <li class="nav-item"><%= link_to "Search", search_path, :class => "nav-link" %></li>
+              <% end %>
+            </ul>
+            <ul class="navbar-nav">
             <% if @current_user.present? %>
               <% if @current_user.admin? %>
-                <li><%= link_to "Add Movie", new_movie_path %></li>
-                <li><%= link_to "Add Genre", new_genre_path %></li>
-                <li><%= link_to "Add Director", new_director_path %></li>
-                <li><%= link_to "All Users", users_path %></li>
-              <% end %>
-              <li><%= link_to "Log out #{ @current_user.username }", login_path, :method => 'delete' %></li>
-            <% else %>
-              <li><%= link_to "Sign Up", new_user_path %></li>
-              <li><%= link_to "Log In", login_path %></li>
-            <% end %>
-          </ul>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Administration
+                </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <%= link_to "All Users", users_path, :class => "dropdown-item" %>
+                    <%= link_to "Add Movie", new_movie_path, :class => "dropdown-item" %>
+                    <%= link_to "Add Actor", new_actor_path, :class => "dropdown-item" %>
+                    <%= link_to "Add Director", new_director_path, :class => "dropdown-item" %>
+                    <%= link_to "Add Genre", new_genre_path, :class => "dropdown-item" %>
+                  </div>
+                </li>
+                <% end %>
+                  <li class="nav-item"><%= link_to "New list", new_list_path, :class=> "nav-link" %></li>
+                  <li class="nav-item"><%= link_to "My lists", my_lists_path, :class => "nav-link" %></li>
+                  <li class="nav-item"><%= link_to "Log out", login_path, :method => 'delete', :class => "nav-link" %></li>
+              <% else %>
+                <li class="nav-item"><%= link_to "Sign Up", new_user_path, :class => "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Log In", login_path, :class => "nav-link" %></li>
+            </ul>
+          <% end %>
         </nav>
       </header>
-      <%= yield %>
+      <div class="main-wrapper">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

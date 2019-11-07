@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_113259) do
+ActiveRecord::Schema.define(version: 2019_11_05_105212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actors", force: :cascade do |t|
+    t.text "name"
+    t.date "dob"
+    t.text "pob"
+    t.text "imdb_id"
+    t.integer "tmdb_id"
+    t.text "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "actors_lists", id: false, force: :cascade do |t|
+    t.integer "actor_id"
+    t.integer "list_id"
+  end
+
+  create_table "actors_movies", id: false, force: :cascade do |t|
+    t.integer "actor_id"
+    t.integer "movie_id"
+  end
 
   create_table "directors", force: :cascade do |t|
     t.text "name"
@@ -22,6 +43,13 @@ ActiveRecord::Schema.define(version: 2019_11_03_113259) do
     t.text "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "imdb_id"
+    t.integer "tmdb_id"
+  end
+
+  create_table "directors_lists", id: false, force: :cascade do |t|
+    t.integer "director_id"
+    t.integer "list_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -41,6 +69,7 @@ ActiveRecord::Schema.define(version: 2019_11_03_113259) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "private", default: true
+    t.text "category"
   end
 
   create_table "lists_movies", id: false, force: :cascade do |t|

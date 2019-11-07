@@ -9,8 +9,9 @@
   <%= f.number_field :duration %>
   <%= f.label :image %>
   <%= f.url_field :image %>
-  <%= f.label :imdb_id %>
+  <%= f.label :imdb_id, "IMDB id" %>
   <%= f.text_field :imdb_id %>
+  <%= f.label :tmdb_id, "TMDB id" %>
   <%= f.number_field :tmdb_id %>
   <%= f.select :director_id, Director.pluck(:name, :id).sort, :include_blank => true %>
   <%= hidden_field_tag "movie[genre_ids][]", nil %>

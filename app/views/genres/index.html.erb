@@ -2,13 +2,15 @@
 
 <div class="genre-main">
   <% @genres.order('name').each do |genre| %>
-    <div class="genre-list grid">
-      <%= link_to genre.name, genre_path(genre) %>
-      <div class="genre-movies hs">
-        <% genre.movies.each do |movie| %>
+    <h2 class="minor-top-buffer"><%= link_to genre.name, genre_path(genre) %></h2>
+    <div class="board">
+      <% genre.movies.each do |movie| %>
+      <div class="tile">
+        <div class="photo">
           <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
-        <% end %>
+        </div>
       </div>
+      <% end %>
     </div>
-  <% end %>
+    <% end %>
 </div>

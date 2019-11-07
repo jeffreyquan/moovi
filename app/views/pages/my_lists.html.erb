@@ -1,0 +1,138 @@
+<h1>My Lists</h1>
+<h2 class="list-title-main top-buffer">Movies</h2>
+<% if @current_user.lists.where(:category => "Movies").present? %>
+  <%   @current_user.lists.where(:category => "Movies").each do |list| %>
+    <% if list.movies.present? %>
+      <div class="list-heading">
+        <h3 class="minor-top-buffer">
+          <%= link_to list.name, list_path(list), :class => "list-title-secondary" %>
+        </h3>
+        <span class="add-link">
+          <%= link_to "Add", movies_path %>
+        </span>
+        <span class="edit-link">
+          <%= link_to "Edit", edit_list_path(list) %>
+        </span>
+        <span class="delete-link">
+          <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+        </span>
+      </div>
+      <div class="board">
+        <% list.movies.each do |movie| %>
+        <div class="tile">
+          <div class="photo">
+            <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    <% else %>
+      <h3 class="minor-top-buffer">
+        <%= link_to list.name, list_path(list),:class => "list-title-secondary" %>
+      </h3>
+      <span class="add-link">
+        <%= link_to "Add", movies_path %>
+      </span>
+      <span class="edit-link">
+        <%= link_to "Edit", edit_list_path(list) %>
+      </span>
+      <span class="delete-link">
+        <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+      </span>
+    <% end %>
+  <% end %>
+<% else %>
+  <p class="no-list">Currently no lists for movies.</p>
+<% end %>
+
+<h2 class="list-title-main top-buffer">Actors</h2>
+<% if @current_user.lists.where(:category => "Actors").present? %>
+  <%   @current_user.lists.where(:category => "Actors").each do |list| %>
+    <% if list.actors.present? %>
+      <div class="list-heading">
+        <h3 class="minor-top-buffer">
+          <%= link_to list.name, list_path(list), :class => "list-title-secondary" %>
+        </h3>
+        <span class="add-link">
+          <%= link_to "Add", actors_path %>
+        </span>
+        <span class="edit-link">
+          <%= link_to "Edit", edit_list_path(list) %>
+        </span>
+        <span class="delete-link">
+          <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+        </span>
+      </div>
+      <div class="board">
+        <% list.actors.each do |actor| %>
+        <div class="tile">
+          <div class="photo">
+            <%= link_to image_tag(actor.image, :class => 'thumb', :alt => actor.name), actor %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    <% else %>
+      <h3 class="minor-top-buffer">
+        <%= link_to list.name, list_path(list),:class => "list-title-secondary" %>
+      </h3>
+      <span class="add-link">
+        <%= link_to "Add", actors_path %>
+      </span>
+      <span class="edit-link">
+        <%= link_to "Edit", edit_list_path(list) %>
+      </span>
+      <span class="delete-link">
+        <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+      </span>
+    <% end %>
+  <% end %>
+<% else %>
+  <p class="no-list">Currently no lists for actors.</p>
+<% end %>
+
+<h2 class="list-title-main top-buffer">Directors</h2>
+<% if @current_user.lists.where(:category => "Directors").present? %>
+  <%   @current_user.lists.where(:category => "Directors").each do |list| %>
+    <% if list.directors.present? %>
+      <div class="list-heading">
+        <h3 class="minor-top-buffer">
+          <%= link_to list.name, list_path(list), :class => "list-title-secondary" %>
+        </h3>
+        <span class="add-link">
+          <%= link_to "Add", directors_path %>
+        </span>
+        <span class="edit-link">
+          <%= link_to "Edit", edit_list_path(list) %>
+        </span>
+        <span class="delete-link">
+          <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+        </span>
+      </div>
+      <div class="board">
+        <% list.directors.each do |director| %>
+        <div class="tile">
+          <div class="photo">
+            <%= link_to image_tag(director.image, :class => 'thumb', :alt => director.name), director %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    <% else %>
+      <h3 class="minor-top-buffer">
+        <%= link_to list.name, list_path(list),:class => "list-title-secondary" %>
+      </h3>
+      <span class="add-link">
+        <%= link_to "Add", directors_path %>
+      </span>
+      <span class="edit-link">
+        <%= link_to "Edit", edit_list_path(list) %>
+      </span>
+      <span class="delete-link">
+        <%= link_to "Delete", list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+      </span>
+    <% end %>
+  <% end %>
+<% else %>
+  <p class="no-list">Currently no lists for directors.</p>
+<% end %>

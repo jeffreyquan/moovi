@@ -1,3 +1,5 @@
 <h2>Edit list</h2>
 
+<%= link_to "Delete", @list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+
 <%= render :partial => 'form' %>

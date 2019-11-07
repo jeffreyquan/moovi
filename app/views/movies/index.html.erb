@@ -1,3 +1,14 @@
-<% @movies.each do |movie| %>
-  <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
-<% end %>
+<h1>Movies</h1>
+
+<div class="board">
+  <% @movies.each do |movie| %>
+  <div class="tile">
+    <div class="photo">
+      <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie if movie.image.present? %>
+    </div>
+    <div class="movie-photo-name">
+      <%= movie.title %>
+    </div>
+  </div>
+  <% end %>
+</div>

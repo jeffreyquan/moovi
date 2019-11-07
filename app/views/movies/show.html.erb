@@ -1,35 +1,88 @@
-<h2><%= @movie.title %></h2>
-<% if @current_user.admin? %>
-  <%= link_to "Edit", edit_movie_path(@movie) %>
-<% end %>
+<div class="movie-show-page">
+  <section class="movie-title-block">
+    <h1><%= @movie.title %></h1>
+    <%= link_to "Edit", edit_movie_path(@movie) if @current_user.present? && @current_user.admin? %>
+    <p id="movie-minor-info">
+      <span><%= @movie.classification if @movie.classification.present? %></span>
+      <span><%= @duration if @duration.present? %></span>
+      <% @movie.genres.each do |genre| %>
+        <span><%= link_to genre.name, genre %></span>
+      <% end %>
+    </p>
+  </section>
 
-<div class="movie-profile">
-  <%= image_tag @movie.image, :class => 'feature', :alt => @movie.title if @movie.image.present? %>
-
-  <div class="movie-info">
-    <h3>Overview</h3>
-    <p><%= @movie.overview %></p>
-    <ul>
-      <li>Director: <%= link_to @movie.director.name, @movie.director %></li>
-      <li>Year: <%= @movie.year %></li>
-      <li>Rate: <%= @movie.classification %></li>
-      <li>Duration: <%= @movie.duration %></li>
-    </ul>
+  <div class="container movie-profile">
+    <div class="row justify-content-between">
+      <div class="hero-poster col-12 col-md-4">
+        <%= image_tag @movie.image, :class => 'feature', :alt => @movie.title if @movie.image.present? %>
+      </div>
+      <div class="trailer col-12 col-md-8">
+        <iframe width="100%" height="450" src=<%= @embed_url %> frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
   </div>
-</div>
 
-<% if @current_user.present? && @current_user.lists.present? %>
-  <%= render :partial => 'form_add_movie_to_list' %>
-<% else %>
-  <%= link_to "Sign in to add movie to list", login_path %>
-<% end %>
+  <div class="container movie-info">
+    <div class='row top-buffer'>
+      <div id="overview" class="col-12 col-md-8">
+        <h3>Overview</h3>
+        <p id="plot" align="justify"><%= @movie.overview %></p>
+        <h3>Director</h3>
+        <h4><%= link_to @movie.director.name, @movie.director %></h4>
+      </div>
+      <div class="list col-12 col-md-4">
+        <% if @current_user.present? %>
+          <h3>Lists this movie is in:</h3>
+          <% if @lists_movie_is_in.count == 0 %>
+            <p>None</p>
+          <% else %>
+          <ul>
+            <% @lists_movie_is_in.each do |list| %>
+              <li><p><%= list.name %></p></li>
+            <% end %>
+          <% end %>
+          </ul>
+          <div id="movie-list-modal">
+              <%= render :partial => 'modal' %>
+          </div>
+
+        <% else %>
+          <%= link_to "Sign in to add movie to list", login_path %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div id="top-billed-casts" class="container">
+    <div class="row minor-top-buffer">
+      <div class="col-12">
+        <h3>Main casts</h3>
+      </div>
+    </div>
+      <div id="top-casts-row" class="row">
+        <% @top_five_actors.each do |actor| %>
+            <div class="card">
+              <%= link_to image_tag(actor.image, :class => "thumb-cast", :alt => actor.name), actor %>
+              <div class="card-body">
+                <h5><%= actor.name %></h5>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
 
-<div class="other-movies-by-director">
+
   <h3>Other movies by <%= @movie.director.name %></h3>
-  <% @movie.director.movies.each do |movie| %>
-    <% if movie.image.present? && movie.id != @movie.id %>
-      <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie  %>
+    <div class="board">
+      <% @movie.director.movies.each do |movie| %>
+        <% if movie.image.present? && movie.id != @movie.id %>
+        <div class="tile">
+          <div class="photo">
+            <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie  %>  
+        </div>
+      </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>

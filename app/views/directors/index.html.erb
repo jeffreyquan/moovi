@@ -1,3 +1,14 @@
-<% @directors.each do |director| %>
-    <%= link_to image_tag(director.image, :class => 'thumb', :alt => director.name), director if director.image.present? %>
-<% end %>
+<h1>Directors</h1>
+
+<div class="board">
+  <% @directors.each do |director| %>
+      <div class="tile">
+        <div class="photo">
+          <%= link_to image_tag(director.image, :class => 'thumb', :alt => director.name), director if director.image.present? %>
+        </div>
+        <div class="photo-name">
+          <%= director.name %>
+        </div>
+      </div>
+  <% end %>
+</div>

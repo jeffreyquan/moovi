@@ -1,9 +1,8 @@
 class ListsController < ApplicationController
-  before_action :check_for_login, :only => [:create, :new, :edit]
-
+  before_action :check_for_login, :only => [:create, :new, :edit, :update, :destroy]
 
   def index
-    @lists = List.where(:private => false)
+    @lists = List.where(:private => false).sort
   end
 
   def new
@@ -13,7 +12,9 @@ class ListsController < ApplicationController
   def create
     list = List.create list_params
     @current_user.lists << list
-    redirect_to root_path
+    redirect_to movies_path if list.category == "Movies"
+    redirect_to actors_path if list.category == "Actors"
+    redirect_to directors_path if list.category == "Directors"
   end
 
   def edit
@@ -43,6 +44,6 @@ class ListsController < ApplicationController
 
   private
   def list_params
-    params.require(:list).permit(:name, :private, :movie_ids => [])
+    params.require(:list).permit(:name, :private, :category, :movie_ids => [], :actor_ids => [], :director_ids => [])
   end
 end
