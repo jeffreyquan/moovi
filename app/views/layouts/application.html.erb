@@ -32,8 +32,9 @@
               <li class="nav-item"><%= link_to "Lists", lists_path, :class => "nav-link" %></li>
               <% if @current_user.present? %>
                 <li class="nav-item"><%= link_to "Search", search_path, :class => "nav-link" %></li>
+
               <% end %>
-            </ul>
+                </ul>
             <ul class="navbar-nav">
             <% if @current_user.present? %>
               <% if @current_user.admin? %>
@@ -60,6 +61,16 @@
           <% end %>
         </nav>
       </header>
+      <div class="search-query" class="row">
+        <div class="col-11 search-query-box">
+         <%= form_tag search_result_path, :method => "get" do %>
+           <%= text_field_tag :search_query, params[:search_query], :class => "form-control mr-sm-2", :placeholder => "Search for movies, actors, directors or genres" %>
+        </div>
+        <div class="col-1 search-button">
+           <%= submit_tag "Search", name: nil, id: "search-btn", :class => "btn btn-dark my-2 my-sm-0" %>
+         <% end %>
+       </div>
+      </div>
       <div class="main-wrapper">
         <%= yield %>
       </div>

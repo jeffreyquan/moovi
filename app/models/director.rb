@@ -8,12 +8,24 @@ class Director < ApplicationRecord
   # validates :imdb_id, :uniqueness => true
   validates :tmdb_id, :uniqueness => true
 
-  include PgSearch::Model
+  # this is part of the PgSearch set up
+  include PgSearch
+
   pg_search_scope :search, against: :name,
-  associated_against: {
-    actors: :name,
-    genres: :name,
-    movies: :title
-  },
-  using: {tsearch: {dictionary: "english"}}
+    associated_against: {
+      genres: :name,
+      actors: :name,
+      movies: [:title, :overview]
+    },
+    using: {tsearch: {dictionary: "english"}}
+
+  def self.text_search query
+    if query.present?
+      search(query)
+    else
+      scoped
+    end
+  end
+ # end of PgSearch
+
 end

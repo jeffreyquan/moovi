@@ -7,13 +7,24 @@ class Actor < ApplicationRecord
   # validates :imdb_id, :uniqueness => true
   validates :tmdb_id, :uniqueness => true
 
-  include PgSearch::Model
+  # this is part of the PgSearch set up
+  include PgSearch
+
   pg_search_scope :search, against: :name,
-  associated_against: {
-    genres: :name,
-    directors: :name,
-    movies: [:name, :overview]
-  },
-  using: {tsearch: {dictionary: "english"}}
+    associated_against: {
+      genres: :name,
+      directors: :name,
+      movies: [:title, :overview]
+    },
+    using: {tsearch: {dictionary: "english"}}
+
+  def self.text_search query
+    if query.present?
+      search(query)
+    else
+      scoped
+    end
+  end
+ # end of PgSearch
 
 end

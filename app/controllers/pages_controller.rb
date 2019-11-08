@@ -32,7 +32,19 @@ class PagesController < ApplicationController
     # @movies = get_movie url
     # @top_five = @movies.body["Search"][0..4]
     #
+  end
 
+  def search_result
+   if params[:search_query].present?
+     query = params[:search_query].titleize
+     @movies = Movie.all
+     #search query in movies and associated models
+     @movies_result = @movies.text_search query
+     #creates message if no results
+     @message = 'No results were found.' if @movies_result.nil?
+   else
+     @message = 'Find movies by title, actor, genre or director.'
+   end
   end
 
   private

@@ -17,5 +17,6 @@ Rails.application.routes.draw do
 
   get 'movies/add/:id' => 'movies#add', :as => 'add_movie'
 
+  get '/search_result' => 'pages#search_result', :as => 'search_result'
   get '/my_lists' => 'pages#my_lists'
 end
