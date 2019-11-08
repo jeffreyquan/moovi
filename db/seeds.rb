@@ -131,6 +131,7 @@ movies.each do |movie|
         new_actor.save
         actor_count += 1
         movie.actors << new_actor
+        sleep(1)
       end
     end
   end
