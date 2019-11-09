@@ -179,8 +179,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    themoviedb (1.0.1)
-      httparty
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -215,6 +213,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   formtastic (~> 3.0)
+  httparty
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
@@ -227,7 +226,6 @@ DEPENDENCIES
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
-  themoviedb
   turbolinks (~> 5)
   tzinfo-data
   unirest

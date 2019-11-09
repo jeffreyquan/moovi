@@ -111,7 +111,7 @@ movies.each do |movie|
   tmdb_key = Rails.application.secrets.tmdb_api_key
   url_for_credits = "https://api.themoviedb.org/3/movie/#{movie_tmdb_id}/credits?api_key=#{tmdb_key}"
   credits = HTTParty.get url_for_credits
-  actor_credits = credits["cast"][0..9] if credits["cast"].present?
+  actor_credits = credits["cast"][0..1] if credits["cast"].present?
   if actor_credits.present?
     actor_credits.each do |actor|
       actor_tmdb_id = actor["id"]
@@ -131,7 +131,7 @@ movies.each do |movie|
         new_actor.save
         actor_count += 1
         movie.actors << new_actor
-        sleep(1)
+        # sleep(1)
       end
     end
   end

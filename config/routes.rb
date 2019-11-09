@@ -1,22 +1,26 @@
 Rails.application.routes.draw do
   root :to => 'pages#home'
 
-  resources :users, :only => [:new, :create, :index, :show, :edit, :update, :destroy]
-  resources :movies, :only => [:new, :create, :index, :show, :edit, :update, :destroy]
-  resources :directors, :only => [:new, :create, :index, :show, :edit, :update, :destroy]
-  resources :lists, :only => [:new, :create, :index, :show, :edit, :update, :destroy]
-  resources :genres, :only => [:new, :create, :index, :show, :edit, :update, :destroy]
-  resources :actors, :only => [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :users
+  resources :movies
+  resources :directors
+  resources :lists
+  resources :genres
+  resources :actors
 
-  get '/search' => 'pages#search', :as => 'search'
-  get '/result'=> 'pages#result'
+  # search and result from the TMDB using API
+  get '/tmdb_result'=> 'pages#tmdb_result', :as => 'tmdb_result'
+  get '/movies/add/:id' => 'movies#add', :as => 'add_movie'
 
+  # session routes
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
 
-  get 'movies/add/:id' => 'movies#add', :as => 'add_movie'
+  # search and result routes
+  get '/show' => 'pages#search', :as => 'search'
+  get '/result' => 'pages#result', :as => 'result'
 
-  get '/search_result' => 'pages#search_result', :as => 'search_result'
-  get '/my_lists' => 'pages#my_lists'
+  # route to user's lists
+  get '/my_lists' => 'pages#my_lists', :as => 'my_lists'
 end

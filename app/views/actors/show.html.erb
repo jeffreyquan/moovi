@@ -1,10 +1,9 @@
 <div class="actor-heading">
-  <h1><%= @actor.name %>
+  <h1><%= @actor.name %></h1>
   <% if @current_user.present? && @current_user.admin? %>
     <span><%= link_to "Edit", edit_actor_path(@actor) %></span>
     <span><%= link_to "Delete", @actor, :method => 'delete', :data => { :confirm => 'Are you sure?' } %></span>
   <% end %>
-  </h1>
 </div>
 
 <div class="container actor-profile">

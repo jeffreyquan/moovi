@@ -1,26 +1,56 @@
-
-<h2>Results</h2>
-
-<%= link_to "Search Again", search_path, :class => "btn btn-outline-secondary" %>
-
-<% if !@tmdb_results.nil? %>
-   <p class="search-number"><strong>Found <%= pluralize @tmdb_results.count, "movie" %>.</strong></p>
-   <div class="container">
-     <div id="movie-search-results" class="row">
-        <% @tmdb_results.uniq.each do |movie| %>
-        <div class="card">
-          <%= image_tag "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie['poster_path'], :class => 'thumb-result', :alt => movie['title'] if movie['poster_path'].present? %>
-          <div class="card-body">
-            <h5><%= movie['title'] %> <%= movie['release_date'].to_date.strftime '%Y' if movie['release_date'].present? %>
-            </h5>
-            <p>
-              <%= link_to "Add movie", add_movie_path(movie["id"]), :class => "btn btn-outline-info" %>
-            </p>
-          </div>
-        </div>
-        <% end %>
+<h1>Results</h1>
+<% if !@movies_result.nil? %>
+<h2 class="minor-top-buffer"><strong>Movies</strong></h2>
+ <p class="search-number">Found <%= pluralize @movies_result.count, "results" %>.</p>
+ <div class="board">
+ <% @movies_result.each do |movie|%>
+   <div class="tile">
+     <div class="photo">
+        <%= link_to image_tag(movie.image, :class => "thumb", :alt => movie.title), movie if movie.image.present? %>
       </div>
-  <% else %>
-    <p>No movies were found.</p>
+      <div class="movie-photo-name">
+        <%= link_to movie.title, movie_path(movie.id) %>
+      </div>
+    </div>
+ <% end %>
+</div>
+<% else %>
+  <p>No movies were found.</p>
 <% end %>
-  </div>
+
+<% if !@actors_result.nil? %>
+<h2 class="minor-top-buffer"><strong>Actors</strong></h2>
+ <p class="search-number">Found <%= pluralize @actors_result.count, "results" %>.</p>
+ <div class="board">
+ <% @actors_result.each do |actor|%>
+   <div class="tile">
+     <div class="photo">
+        <%= link_to image_tag(actor.image, :class => "thumb", :alt => actor.name), actor if actor.image.present? %>
+      </div>
+      <div class="photo-name">
+        <%= link_to actor.name, actor_path(actor.id) %>
+      </div>
+    </div>
+   <% end %>
+</div>
+<% else %>
+  <p>No actors were found.</p>
+<% end %>
+
+<% if !@directors_result.nil? %>
+<h2 class="minor-top-buffer"><strong>Directors</strong></h2>
+ <p class="search-number">Found <%= pluralize @directors_result.count, "results" %>.</p>
+<div class="board">
+ <% @directors_result.each do |director|%>
+   <div class="tile">
+     <div class="photo">
+        <%= link_to image_tag(director.image, :class => "thumb", :alt => director.name), director if director.image.present? %>
+      </div>
+      <div class="photo-name">
+        <%= link_to director.name, director %>
+       </div>
+   <% end %>
+</div>
+<% else %>
+  <p>No directors were found.</p>
+<% end %>

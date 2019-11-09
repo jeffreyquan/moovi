@@ -1,13 +1,25 @@
 <h1>Movies</h1>
+<div class="container">
+  <form class="search-movies" action="/tmdb_result" method="get">
+    <div class="tmdb-search row">
+      <div class="col-3">
+        <input type="search" name="title" required placeholder="Find on TMDB" class="form-control">
+      </div>
+      <div class="col-1">
+        <button class="btn btn-outline-primary">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
 
-<div class="board">
+<div class="board minor-top-buffer">
   <% @movies.each do |movie| %>
   <div class="tile">
     <div class="photo">
       <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie if movie.image.present? %>
     </div>
     <div class="movie-photo-name">
-      <%= movie.title %>
+      <%= link_to movie.title, movie %>
     </div>
   </div>
   <% end %>

@@ -9,15 +9,19 @@ class Director < ApplicationRecord
   validates :tmdb_id, :uniqueness => true
 
   # this is part of the PgSearch set up
-  include PgSearch
-
+  include PgSearch::Model
   pg_search_scope :search, against: :name,
     associated_against: {
       genres: :name,
       actors: :name,
       movies: [:title, :overview]
     },
-    using: {tsearch: {dictionary: "english"}}
+    :using => {
+      :tsearch => {
+        :dictionary => "english"
+      },
+      :trigram => {}
+    }
 
   def self.text_search query
     if query.present?

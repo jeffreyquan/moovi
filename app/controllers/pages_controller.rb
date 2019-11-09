@@ -1,18 +1,14 @@
 class PagesController < ApplicationController
-  before_action :check_for_login, :only => [:search, :result, :my_lists]
+  before_action :check_for_login, :only => [:my_lists]
 
   def home
     @heroes = (Actor.all + Director.all + Movie.all).shuffle
   end
 
-  def search
-  end
-
   def my_lists
-
   end
 
-  def result
+  def tmdb_result
     # Using TheMovieDB API
     query = params[:title]
     # @movies = Tmdb::Movie.find(title) # using https://github.com/ahmetabdi/themoviedb gem
@@ -26,40 +22,26 @@ class PagesController < ApplicationController
     else
       @tmdb_results = nil
     end
-
-    # @movies = Movie.all
-
-    # @movies = get_movie url
-    # @top_five = @movies.body["Search"][0..4]
-    #
   end
 
-  def search_result
+  def search
+  end
+
+  def result
    if params[:search_query].present?
      query = params[:search_query].titleize
-     @movies = Movie.all
-     #search query in movies and associated models
-     @movies_result = @movies.text_search query
-     #creates message if no results
-     @message = 'No results were found.' if @movies_result.nil?
-   else
-     @message = 'Find movies by title, actor, genre or director.'
-   end
+
+     # search query in movies and associated models
+     movies = Movie.all
+     @movies_result = movies.text_search query
+
+     # search query in actors and associated models
+     actors = Actor.all
+     @actors_result = actors.text_search query
+
+     # search query in actors and associated models
+     directors = Director.all
+     @directors_result = directors.text_search query
+    end
   end
-
-  private
-  # using Rapid API
-
-  # Using RapidAPI
-  # title = params[:title]
-  # url = "https://movie-database-imdb-alternative.p.rapidapi.com/?page=1&r=json&s=#{ title.split(' ').join('+') }"
-
-  # def get_movie url
-  #   Unirest.get url, headers:{
-  #   "X-RapidAPI-Host" => "movie-database-imdb-alternative.p.rapidapi.com",
-  #   "X-RapidAPI-Key" => Rails.application.secrets.rapid_api_key
-  #   }
-  #   # this action will get the whole json
-  # end
-
 end

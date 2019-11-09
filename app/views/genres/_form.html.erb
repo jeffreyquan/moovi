@@ -1,5 +1,15 @@
 <%= form_for @genre do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
+<div class="col-lg-4 actor-form">
+  <div class="form-group top-buffer">
+    <div class="input-tag">
+      <%= f.label :name %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="submit-button">
+    <%= f.submit "Submit", :class=> "btn btn-primary" %>
+  </div>
+</div>
 <% end %>

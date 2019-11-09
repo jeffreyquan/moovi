@@ -1,24 +1,82 @@
 <%= form_for @movie do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title, :required => true, :autofocus => true %>
-  <%= f.label :year %>
-  <%= f.number_field :year %>
-  <%= f.label :overview %>
-  <%= f.text_field :overview %>
-  <%= f.label :duration %>
-  <%= f.number_field :duration %>
-  <%= f.label :image %>
-  <%= f.url_field :image %>
-  <%= f.label :imdb_id, "IMDB id" %>
-  <%= f.text_field :imdb_id %>
-  <%= f.label :tmdb_id, "TMDB id" %>
-  <%= f.number_field :tmdb_id %>
-  <%= f.select :director_id, Director.pluck(:name, :id).sort, :include_blank => true %>
-  <%= hidden_field_tag "movie[genre_ids][]", nil %>
-  <% Genre.all.order('name').each do |genre| %>
-    <%= check_box_tag "movie[genre_ids][]", genre.id, @movie.genre_ids.include?(genre.id), id: dom_id(genre) %>
-    <%= label_tag dom_id(genre), genre.name %><br>
-  <% end %>
-  <%= f.submit %>
-
+<div class="col-lg-4 actor-form">
+  <div class="form-group top-buffer">
+    <div class="input-tag">
+      <%= f.label :title %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :title, :required => true, :autofocus => true, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-tag">
+      <%= f.label :year %>
+    </div>
+    <div class="input-field">
+      <%= f.number_field :year, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-tag">
+      <%= f.label :overview %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :overview, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-field">
+      <%= f.label :duration %>
+    </div>
+    <div class="input-tag">
+      <%= f.number_field :duration, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-tag">
+      <%= f.label :image %>
+    </div>
+    <div class="input-field">
+      <%= f.url_field :image, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-tag">
+      <%= f.label :imdb_id, "IMDB id" %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :imdb_id, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-tag">
+      <%= f.label :tmdb_id, "TMDB id" %>
+    </div>
+    <div class="input-field">
+      <%= f.number_field :tmdb_id, :class => 'form-control' %>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="input-tag">
+    <%= f.label :director_id, "Director" %>
+  </div>
+  <div class="input-field">
+    <%= f.select :director_id, Director.pluck(:name, :id).sort, :include_blank => true, :class => 'form-control-lg' %>
+  </div>
+</div>
+  <div class="input-tag">
+    <%= f.label :genre_ids, "Genres" %>
+  </div>
+    <div class="form-check">
+      <%= hidden_field_tag "movie[genre_ids][]", nil %>
+      <% Genre.all.order('name').each do |genre| %>
+        <%= check_box_tag "movie[genre_ids][]", genre.id, @movie.genre_ids.include?(genre.id), id: dom_id(genre) %>
+        <%= label_tag dom_id(genre), genre.name %><br>
+      <% end %>
+    </div>
+  <div class="submit-button">
+    <%= f.submit "Submit", :class=> "btn btn-primary" %>
+  </div>
 <% end %>
+</div>

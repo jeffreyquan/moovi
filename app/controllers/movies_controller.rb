@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
   before_action :check_for_login, :only => [:add, :create, :edit, :update]
 
   def index
-    @movies = Movie.all.sort_by{|key| key["name"]}
+    @movies = Movie.all.shuffle
   end
 
   def new
@@ -62,7 +62,7 @@ class MoviesController < ApplicationController
 
   private
   def movie_params
-    params.require(:movie).permit(:title, :year, :overview, :classification, :duration, :image, :director_id, :genre_ids => [],:list_ids => [])
+    params.require(:movie).permit(:title, :year, :overview, :classification, :duration, :image, :director_id, :youtube, :genre_ids => [],:list_ids => [])
   end
 
 end

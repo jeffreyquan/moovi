@@ -30,47 +30,45 @@
               <li class="nav-item"><%= link_to "Actors", actors_path, :class => "nav-link" %></li>
               <li class="nav-item"><%= link_to "Directors", directors_path, :class => "nav-link" %></li>
               <li class="nav-item"><%= link_to "Lists", lists_path, :class => "nav-link" %></li>
-              <% if @current_user.present? %>
-                <li class="nav-item"><%= link_to "Search", search_path, :class => "nav-link" %></li>
-
-              <% end %>
+                <% if @current_user.present? %>
+                  <% if @current_user.admin? %>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Administration
+                    </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <%= link_to "All Users", users_path, :class => "dropdown-item" %>
+                        <%= link_to "Add Movie", new_movie_path, :class => "dropdown-item" %>
+                        <%= link_to "Add Actor", new_actor_path, :class => "dropdown-item" %>
+                        <%= link_to "Add Director", new_director_path, :class => "dropdown-item" %>
+                        <%= link_to "Add Genre", new_genre_path, :class => "dropdown-item" %>
+                      </div>
+                    </li>
+                    <% end %>
+                      <li class="nav-item"><%= link_to "New list", new_list_path, :class=> "nav-link" %></li>
+                      <li class="nav-item"><%= link_to "My lists", my_lists_path, :class => "nav-link" %></li>
+                      <li class="nav-item"><%= link_to "Log out", login_path, :method => 'delete', :class => "nav-link" %></li>
+                  <% else %>
+                    <li class="nav-item"><%= link_to "Sign Up", new_user_path, :class => "nav-link" %></li>
+                    <li class="nav-item"><%= link_to "Log In", login_path, :class => "nav-link" %></li>
+                  <% end %>
                 </ul>
-            <ul class="navbar-nav">
-            <% if @current_user.present? %>
-              <% if @current_user.admin? %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Administration
-                </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <%= link_to "All Users", users_path, :class => "dropdown-item" %>
-                    <%= link_to "Add Movie", new_movie_path, :class => "dropdown-item" %>
-                    <%= link_to "Add Actor", new_actor_path, :class => "dropdown-item" %>
-                    <%= link_to "Add Director", new_director_path, :class => "dropdown-item" %>
-                    <%= link_to "Add Genre", new_genre_path, :class => "dropdown-item" %>
-                  </div>
-                </li>
-                <% end %>
-                  <li class="nav-item"><%= link_to "New list", new_list_path, :class=> "nav-link" %></li>
-                  <li class="nav-item"><%= link_to "My lists", my_lists_path, :class => "nav-link" %></li>
-                  <li class="nav-item"><%= link_to "Log out", login_path, :method => 'delete', :class => "nav-link" %></li>
-              <% else %>
-                <li class="nav-item"><%= link_to "Sign Up", new_user_path, :class => "nav-link" %></li>
-                <li class="nav-item"><%= link_to "Log In", login_path, :class => "nav-link" %></li>
-            </ul>
-          <% end %>
+
+                 <%= form_tag result_path, :method => "get", :class => "row" do %>
+                   <div class="col-8 search-query-box">
+                     <%= text_field_tag :search_query, nil, :class => "form-control mr-sm-2 query-box", :placeholder => "Find", :required => true %>
+                   </div>
+                   <div class="col-4 search-button">
+                     <%= button_tag :type => "submit", :class => "btn btn-outline-secondary" do %>
+                       <i class="fas fa-search"></i>
+                      <% end %>
+                    </div>
+                 <% end %>
+          </div>
         </nav>
       </header>
-      <div class="search-query" class="row">
-        <div class="col-11 search-query-box">
-         <%= form_tag search_result_path, :method => "get" do %>
-           <%= text_field_tag :search_query, params[:search_query], :class => "form-control mr-sm-2", :placeholder => "Search for movies, actors, directors or genres" %>
-        </div>
-        <div class="col-1 search-button">
-           <%= submit_tag "Search", name: nil, id: "search-btn", :class => "btn btn-dark my-2 my-sm-0" %>
-         <% end %>
-       </div>
-      </div>
+
+
       <div class="main-wrapper">
         <%= yield %>
       </div>

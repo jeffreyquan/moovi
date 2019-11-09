@@ -66,7 +66,7 @@ ul {
 }
 
 .main-wrapper {
-  margin-top: 0vh;
+  margin-top: 10vh;
   padding: 2rem 4rem 4rem 4rem;
 }
 
@@ -258,6 +258,12 @@ span {
   margin-right: 0.5rem;
 }
 
+.input-group {
+  span {
+    margin-right: 0px;
+  }
+}
+
 h3 {
   font-size: bold;
 }
@@ -321,9 +327,36 @@ ol {
 }
 
 .search-query-box {
-  padding-left: 0px !important;
+  font-size: 1.2rem;
+  padding-right: 0px !important;
 }
 
 .search-button {
   align-items: center;
+}
+
+.tmdb-search{
+  display: flex;
+
+  div {
+    padding-left: 0px;
+  }
+}
+
+.users {
+  font-size: 1.2rem;
+}
+
+.no-account {
+  font-size: 1.2rem;
+}
+
+.actor-form {
+  padding-left: 0px;
+}
+
+.errors {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: red;
 }
