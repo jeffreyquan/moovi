@@ -3,7 +3,7 @@ class DirectorsController < ApplicationController
   before_action :check_for_login, :only => [:new, :edit, :create, :update]
 
   def index
-    @directors = Director.all
+    @directors = Director.all.sort_by {|key| key["name"]}
   end
 
   def new
@@ -54,6 +54,6 @@ class DirectorsController < ApplicationController
 
   private
   def director_params
-    params.require(:director).permit(:name, :dob, :pob, :image, :movie_ids => [],:list_ids => [])
+    params.require(:director).permit(:name, :dob, :pob, :imdb_id, :tmdb_id, :image, :movie_ids => [],:list_ids => [])
   end
 end

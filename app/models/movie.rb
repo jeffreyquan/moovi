@@ -19,9 +19,13 @@ class Movie < ApplicationRecord
     },
     :using => {
       :tsearch => {
-        :dictionary => "english"
+        :dictionary => "english",
+        :prefix => true
       },
-      :trigram => {}
+      :trigram => {
+        :word_similarity => true,
+        :threshold => 0.3
+      }
     }
 
   def self.text_search query
@@ -33,6 +37,7 @@ class Movie < ApplicationRecord
   end
  # end of PgSearch
 
+ # converts duration from minutes to hours and minutes
   def self.convert_duration duration
 
     @result = ''

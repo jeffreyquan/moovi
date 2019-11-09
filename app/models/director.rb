@@ -14,13 +14,17 @@ class Director < ApplicationRecord
     associated_against: {
       genres: :name,
       actors: :name,
-      movies: [:title, :overview]
+      movies: :title
     },
     :using => {
       :tsearch => {
-        :dictionary => "english"
+        :dictionary => "english",
+        :prefix => true
       },
-      :trigram => {}
+      :trigram => {
+        :word_similarity => true,
+        :threshold => 0.3
+      }
     }
 
   def self.text_search query

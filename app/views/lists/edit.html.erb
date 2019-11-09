@@ -2,4 +2,75 @@
 
 <%= link_to "Delete", @list, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
 
-<%= render :partial => 'form' %>
+<div class="list-form-wrapper">
+<%= form_for @list do |f| %>
+  <% if @current_user.present? %>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="form-group">
+        <div><%= f.label :name %></div>
+        <div><%= f.text_field :name, :required => true, :class => 'form-control' %></div>
+
+        <div class="list-form"><%= f.label :category %></div>
+        <div><%= f.select :category, options_for_select([["Movies", "Movies"], ["Actors", "Actors"], ["Directors", "Directors"]], selected: @list.category), {}, disabled: true %></div>
+
+        <div class="list-form"><%= f.label :private, "Share with:" %></div>
+        <div><%= f.select :private, [["Only Me", true],["Everyone", false]] %></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="board edit-list">
+  <% if @list.category == "Movies" %>
+      <%= hidden_field_tag "list[movie_ids][]", nil %>
+      <% @list.movies.each do |movie| %>
+          <div class="checkbox-image card">
+            <%= label_tag dom_id(movie), image_tag(movie.image, :class => 'thumb-cast', :alt => movie.title) %>
+            <div class="card-body checkbox-tag">
+              <%= check_box_tag "list[movie_ids][]", movie.id, @list.movie_ids.include?(movie.id), id: dom_id(movie) %>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+
+  <% if @list.category == "Actors" %>
+      <%= hidden_field_tag "list[actor_ids][]", nil %>
+      <% @list.actors.each do |actor| %>
+          <div class="checkbox-image">
+            <div class="checkbox-image-secondary">
+              <div class="cb-photo">
+                <%= label_tag dom_id(actor), image_tag(actor.image, :class => 'thumb', :alt => actor.name) %>
+              </div>
+              <div class="photo-name">
+                <%= link_to actor.name, actor %>
+              </div>
+            </div>
+            <div class="card-body checkbox-tag">
+              <%= check_box_tag "list[actor_ids][]", actor.id, @list.actor_ids.include?(actor.id), id: dom_id(actor) %>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+
+  <% if @list.category == "Directors" %>
+      <%= hidden_field_tag "list[director_ids][]", nil %>
+      <% @list.directors.each do |director| %>
+          <div class="checkbox-image">
+            <div class="checkbox-image-secondary">
+              <div class="cb-photo">
+                <%= label_tag dom_id(director), image_tag(director.image, :class => 'thumb', :alt => director.name) %>
+              </div>
+              <div class="photo-name">
+                <%= link_to director.name, director %>
+              </div>
+            </div>
+            <div class="card-body checkbox-tag">
+              <%= check_box_tag "list[director_ids][]", director.id, @list.director_ids.include?(director.id), id: dom_id(director) %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <%= f.submit "Save", :class => 'btn btn-secondary minor-top-buffer edit-list-btn' %>
+  <% end %>
+<% end %>

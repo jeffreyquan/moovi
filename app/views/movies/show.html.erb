@@ -1,7 +1,8 @@
-<div class="movie-show-page">  
+<div class="movie-show-page">
   <section class="movie-title-block">
     <h1><%= @movie.title %></h1>
     <%= link_to "Edit", edit_movie_path(@movie) if @current_user.present? && @current_user.admin? %>
+    <%= link_to "Delete", @movie, :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
     <p id="movie-minor-info">
       <span><%= @movie.classification if @movie.classification.present? %></span>
       <span><%= @duration if @duration.present? %></span>
@@ -53,28 +54,23 @@
     </div>
   </div>
 
-  <div id="top-billed-casts" class="container">
-    <div class="row minor-top-buffer">
-      <div class="col-12">
-        <h3>Main casts</h3>
-      </div>
+
+<h3 class="minor-top-buffer">Main casts</h3>
+<div class="board">
+  <% @top_five_actors.each do |actor| %>
+  <div class="tile">
+    <div class="photo">
+      <%= link_to image_tag(actor.image, :class => "thumb", :alt => actor.name), actor %>
     </div>
-      <div id="top-casts-row" class="row">
-        <% @top_five_actors.each do |actor| %>
-            <div class="card">
-              <%= link_to image_tag(actor.image, :class => "thumb-cast", :alt => actor.name), actor %>
-              <div class="card-body">
-                <h5><%= actor.name %></h5>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
+    <div class="photo-name">
+      <h5><%= actor.name %></h5>
     </div>
+  </div>
+  <% end %>
+</div>
 
-
-
-  <h3>Other movies by <%= @movie.director.name %></h3>
+<% if @movie.director.movies.count > 1 %>
+  <h3 class="minor-top-buffer">Other movies by <%= @movie.director.name %></h3>
     <div class="board">
       <% @movie.director.movies.each do |movie| %>
         <% if movie.image.present? && movie.id != @movie.id %>
@@ -86,3 +82,4 @@
       <% end %>
     <% end %>
   </div>
+<% end %>

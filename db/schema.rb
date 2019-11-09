@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_09_033251) do
+ActiveRecord::Schema.define(version: 2019_11_09_075710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "actors", force: :cascade do |t|
     t.text "name"
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_11_09_033251) do
     t.text "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_actors_on_name", opclass: :gist_trgm_ops, using: :gist
   end
 
   create_table "actors_lists", id: false, force: :cascade do |t|
@@ -47,6 +49,7 @@ ActiveRecord::Schema.define(version: 2019_11_09_033251) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "imdb_id"
     t.integer "tmdb_id"
+    t.index ["name"], name: "index_directors_on_name", opclass: :gist_trgm_ops, using: :gist
   end
 
   create_table "directors_lists", id: false, force: :cascade do |t|
@@ -92,6 +95,7 @@ ActiveRecord::Schema.define(version: 2019_11_09_033251) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "youtube"
+    t.index ["title"], name: "index_movies_on_title", opclass: :gist_trgm_ops, using: :gist
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -1,4 +1,46 @@
 <h3><%= @list.name %></h3>
-<% @list.movies.each do |movie| %>
-  <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
+
+<% if @list.category == "Movies" %>
+<div class="board minor-top-buffer">
+  <% @list.movies.each do |movie| %>
+  <div class="tile">
+    <div class="photo">
+      <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie %>
+    </div>
+    <div class="movie-photo-name">
+      <%= link_to movie.title, movie %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<% end %>
+
+<% if @list.category == "Actors" %>
+<div class="board minor-top-buffer">
+  <% @list.actors.each do |actor| %>
+  <div class="tile">
+    <div class="photo">
+      <%= link_to image_tag(actor.image, :class => 'thumb', :alt => actor.name), actor %>
+    </div>
+    <div class="photo-name">
+      <%= link_to actor.name, actor %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<% end %>
+
+<% if @list.category == "Directors" %>
+<div class="board minor-top-buffer">
+  <% @list.directors.each do |director| %>
+  <div class="tile">
+    <div class="photo">
+      <%= link_to image_tag(director.image, :class => 'thumb', :alt => director.name), actor %>
+    </div>
+    <div class="photo-name">
+      <%= link_to director.name, director %>
+    </div>
+  </div>
+  <% end %>
+</div>
 <% end %>

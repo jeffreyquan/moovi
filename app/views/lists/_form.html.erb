@@ -2,32 +2,17 @@
   <%= form_for @list do |f| %>
   <% if @current_user.present? %>
   <div class="row">
-  <div class="col-lg-4">
-    <div class="form-group">
-      <div><%= f.label :name %></div>
-      <div><%= f.text_field :name, :required => true, :class => 'form-control' %></div>
+    <div class="col-lg-4">
+      <div class="form-group">
+        <div><%= f.label :name %></div>
+        <div><%= f.text_field :name, :required => true, :class => 'form-control' %></div>
 
-      <div class="list-form"><%= f.label :category %></div>
-      <div><%= f.select :category, options_for_select([["Movies", "Movies"], ["Actors", "Actors"], ["Directors", "Directors"]], selected: @list.category) %></div>
+        <div class="list-form"><%= f.label :category %></div>
+        <div><%= f.select :category, options_for_select([["Movies", "Movies"], ["Actors", "Actors"], ["Directors", "Directors"]], selected: @list.category) %></div>
 
-      <div class="list-form"><%= f.label :private, "Share with:" %></div>
-      <div><%= f.select :private, [["Only Me", true],["Everyone", false]] %></div>
-
+        <div class="list-form"><%= f.label :private, "Share with:" %></div>
+        <div><%= f.select :private, [["Only Me", true],["Everyone", false]] %></div>
+      </div>
     </div>
   </div>
-</div>
-
-    <%= hidden_field_tag "list[movie_ids][]", nil %>
-    <% @list.movies.each do |movie| %>
-    <div class="checkbox-list">
-      <div class="checkbox-image">
-        <%= label_tag dom_id(movie), image_tag(movie.image, :class => 'thumb', :alt => movie.title) %>
-      </div>
-      <%= check_box_tag "list[movie_ids][]", movie.id, @list.movie_ids.include?(movie.id), id: dom_id(movie) %>
-      <%= label_tag dom_id(movie), movie.title %>
-    </div>
-    <% end %>
-    <%= f.submit "Save", :class => 'btn btn-secondary' %>
-  <% end %>
-<% end %>
 </div>

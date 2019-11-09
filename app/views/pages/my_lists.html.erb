@@ -69,6 +69,9 @@
           <div class="photo">
             <%= link_to image_tag(actor.image, :class => 'thumb', :alt => actor.name), actor %>
           </div>
+          <div class="photo-name">
+            <%= link_to actor.name, actor %>
+          </div>
         </div>
         <% end %>
       </div>
@@ -114,6 +117,9 @@
         <div class="tile">
           <div class="photo">
             <%= link_to image_tag(director.image, :class => 'thumb', :alt => director.name), director %>
+          </div>
+          <div class="photo-name">
+            <%= link_to director.name, director %>
           </div>
         </div>
         <% end %>

@@ -205,6 +205,44 @@ iframe {
   }
 }
 
+.checkbox-image {
+
+
+  .checkbox-image-secondary{
+      position: relative;
+      margin: 0.3rem;
+
+      .photo-name {
+        position: absolute;
+        width: 100%;
+        bottom: 0.5rem;
+        text-align: center;
+        background-color: rgba(0,0,0,0.6);
+        color: white;
+        font-size: 1.2rem;
+
+        a:link {
+          text-decoration: none;
+          color: white;
+        }
+
+        a:visited {
+          color: white;
+        }
+
+        a:active {
+          text-decoration: none;
+        }
+      }
+  }
+}
+
+.thumb-cast-edit {
+  height: 26rem;
+  margin: 0.1rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
 
 .list-form-wrapper {
   font-size: 1.2rem;
@@ -359,4 +397,16 @@ ol {
   margin-top: 1rem;
   font-size: 1.2rem;
   color: red;
+}
+
+.checkbox-image {
+  border: 0px;
+}
+
+.checkbox-tag {
+  text-align: center;
+}
+
+.edit-list {
+
 }
