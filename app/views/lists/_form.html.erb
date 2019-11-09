@@ -1,6 +1,5 @@
 <div class="list-form-wrapper">
-  <%= form_for @list do |f| %>
-  <% if @current_user.present? %>
+<%= form_for @list do |f| %>
   <div class="row">
     <div class="col-lg-4">
       <div class="form-group">
@@ -13,6 +12,8 @@
         <div class="list-form"><%= f.label :private, "Share with:" %></div>
         <div><%= f.select :private, [["Only Me", true],["Everyone", false]] %></div>
       </div>
+      <%= f.submit "Save", :class => 'btn btn-secondary minor-top-buffer edit-list-btn' %>
     </div>
   </div>
+  <% end %>
 </div>

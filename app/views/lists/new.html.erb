@@ -1,3 +1,8 @@
 <h2>Make a new list</h2>
 
-<%= render :partial => 'form', :action_method => 'create' %>
+
+<% if @current_user.present? %>
+  <%= render :partial => 'form', :action_method => 'create' %>
+<% else %>
+  <%= redirect_to root_path %>
+<% end %>

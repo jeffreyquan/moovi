@@ -2,7 +2,10 @@ class ListsController < ApplicationController
   before_action :check_for_login, :only => [:create, :new, :edit, :update, :destroy]
 
   def index
-    @lists = List.where(:private => false).sort
+    lists = List.where(:private => false)
+    @movie_lists = lists.where(:category => "Movies")
+    @actor_lists = lists.where(:category => "Actors")
+    @director_lists = lists.where(:category => "Directors")
   end
 
   def new
