@@ -15,24 +15,24 @@
 
 <% if !@tmdb_results.nil? %>
 <p class="search-number">Found <%= pluralize @tmdb_results.count, "movie" %>.</p>
-  <div class="container">
-     <div id="movie-search-results" class="row">
-        <% @tmdb_results.uniq.each do |movie| %>
-        <div class="card">
-          <%= image_tag "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie['poster_path'], :class => 'thumb-result', :alt => movie['title'] if movie['poster_path'].present? %>
-          <div class="card-body">
-            <p>
-              <% if @current_user.present? %>
-                <%= link_to add_movie_path(movie["id"]), :class => "btn btn-outline-info" do %>
-                  <i class="fas fa-plus"></i>
-                <% end %>
+<div class="container">
+   <div id="movie-search-results" class="row">
+      <% @tmdb_results.uniq.each do |movie| %>
+      <div class="card">
+        <%= image_tag "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie['poster_path'], :class => 'thumb-result', :alt => movie['title'] if movie['poster_path'].present? %>
+        <div class="card-body">
+          <p>
+            <% if @current_user.present? %>
+              <%= link_to add_movie_path(movie["id"]), :class => "btn btn-outline-info" do %>
+                <i class="fas fa-plus"></i>
               <% end %>
-            </p>
-          </div>
+            <% end %>
+          </p>
         </div>
-        <% end %>
       </div>
-      <% else %>
-    <p>No movies were found.</p>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+    <% else %>
+  <p>No movies were found.</p>
+  <% end %>
+</div>
