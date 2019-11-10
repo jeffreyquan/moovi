@@ -1,19 +1,23 @@
 <div class="list-main">
+<% if @movie_lists.present? %>
 <% @movie_lists.each do |list| %>
   <% if list.movies.present? %>
     <div class="movie-list">
       <h3 class="minor-top-buffer"><span class="public-list-names"><%= list.name %></span>by <%= list.user.name %></h3>
-      <div class="board">
-        <% list.movies.each do |movie| %>
-        <div class="tile">
-          <div class="photo">
-            <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie if movie.image.present? %>
+        <div class="board">
+          <% list.movies.each do |movie| %>
+          <div class="tile">
+            <div class="photo">
+              <%= link_to image_tag(movie.image, :class => 'thumb', :alt => movie.title), movie if movie.image.present? %>
+            </div>
           </div>
+          <% end %>
         </div>
-        <% end %>
       </div>
+    <% end %>
   <% end %>
-  <% end %>
+<% end %>
+<% if @actor_lists.present? %>
   <% @actor_lists.each do |list| %>
     <% if list.actors.present? %>
       <div class="actor-list">
@@ -30,24 +34,29 @@
           </div>
           <% end %>
         </div>
+      </div>
     <% end %>
-    <% end %>
-    <% @director_lists.each do |list| %>
-      <% if list.directors.present? %>
-        <div class="director-list">
-          <h3 class="minor-top-buffer"><span class="public-list-names"><%= list.name %></span>by <%= list.user.name %></h3>
-          <div class="board">
-            <% list.directors.each do |director| %>
-            <div class="tile">
-              <div class="photo">
-                <%= link_to image_tag(director.image, :class => 'thumb', :alt => director.name), director if director.image.present? %>
-              </div>
-              <div class="photo-name">
-                <%= link_to director.name, director %>
-              </div>
+  <% end %>
+<% end %>
+<% if @director_lists.present? %>
+  <% @director_lists.each do |list| %>
+    <% if list.directors.present? %>
+      <div class="director-list">
+        <h3 class="minor-top-buffer"><span class="public-list-names"><%= list.name %></span>by <%= list.user.name %></h3>
+        <div class="board">
+          <% list.directors.each do |director| %>
+          <div class="tile">
+            <div class="photo">
+              <%= link_to image_tag(director.image, :class => 'thumb', :alt => director.name), director if director.image.present? %>
             </div>
-            <% end %>
+            <div class="photo-name">
+              <%= link_to director.name, director %>
+            </div>
           </div>
-      <% end %>
-      <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
 </div>
