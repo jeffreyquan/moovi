@@ -31,8 +31,6 @@ gem 'simple_form'
 
 gem 'formtastic', '~> 3.0'
 
-gem 'unirest'
-
 gem 'pg_search'
 
 group :development, :test do
