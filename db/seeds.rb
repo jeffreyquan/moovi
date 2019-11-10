@@ -140,19 +140,23 @@ puts "#{ Actor.count } actors created."
 puts "Actors and Movies."
 
 List.destroy_all
-l1 = List.create :name => "Favourite Movies", :user_id => 1, :category => 'Movies', :private => false
-l2 = List.create :name => "Favourite Actors", :user_id => 1, :category => 'Actors', :private => false
-l3 = List.create :name => "Favourite Directors", :user_id => 1, :category => 'Directors', :private => false
-l4 = List.create :name => "Favourite Movies", :user_id => 2, :category => 'Movies', :private => false
-l5 = List.create :name => "Favourite Actors", :user_id => 2, :category => 'Actors', :private => false
-l6 = List.create :name => "Favourite Directors", :user_id => 2, :category => 'Directors', :private => false
-l7 = List.create :name => "Favourite Movies", :user_id => 3, :category => 'Movies', :private => true
-l8 = List.create :name => "Favourite Actors", :user_id => 3, :category => 'Actors', :private => true
-l9 = List.create :name => "Favourite Directors", :user_id => 3, :category => 'Directors', :private => true
+l1 = List.create :name => "Favourite Movies", :category => 'Movies', :private => false
+l2 = List.create :name => "Favourite Actors", :category => 'Actors', :private => false
+l3 = List.create :name => "Favourite Directors", :category => 'Directors', :private => false
+l4 = List.create :name => "Favourite Movies", :category => 'Movies', :private => false
+l5 = List.create :name => "Favourite Actors", :category => 'Actors', :private => false
+l6 = List.create :name => "Favourite Directors", :category => 'Directors', :private => false
+l7 = List.create :name => "Favourite Movies", :category => 'Movies', :private => true
+l8 = List.create :name => "Favourite Actors", :category => 'Actors', :private => true
+l9 = List.create :name => "Favourite Directors", :category => 'Directors', :private => true
 puts "#{ List.count } lists created."
 
+u1.lists << l1 << l2 << l3
+u2.lists << l4 << l5 << l6
+u3.lists << l7 << l8 << l9
+puts "Users and Lists."
+
 # Associations #################################################################
-puts "Directors and Movies."
 d1.movies << m1 << m2 << m3 << m4 << m5 << m6 << m7 << m8
 d2.movies << m9 << m10 << m11 << m12 << m13 << m14
 d3.movies << m15 << m16 << m17 << m18 << m19 << m20
@@ -165,8 +169,8 @@ d9.movies << m53 << m54
 d10.movies << m55 << m56
 d11.movies << m57 << m58 << m59 << m60
 d12.movies << m61 << m62
+puts "Directors and Movies."
 
-puts "Genres and Movies."
 m1.genres << g1 << g11 << g2
 m2.genres << g4 << g2 << g5
 m3.genres << g1 << g7 << g2 << g6
@@ -229,8 +233,8 @@ m59.genres << g4 << g14 << g1
 m60.genres << g4 << g14 << g1
 m61.genres << g10 << g2 << g4
 m62.genres << g2 << g9
+puts "Genres and Movies."
 
-puts "Lists and Movies."
 l1.movies << m2 << m3 << m10 << m17 << m38 << m44 << m45 << m46 << m47 << m48 << m23
 l3.directors << d1 << d2 << d3 << d10 << d5 << d7
 
@@ -239,3 +243,4 @@ l6.directors << d1 << d5 << d7 << d8 << d4 << d3
 
 l7.movies << m4 << m19 << m22 << m2 << m3 << m50 << m44 << m45 << m46 << m47 << m48 << m23
 l9.directors << d2 << d4 << d9 << d12 << d11
+puts "Lists and Movies."
