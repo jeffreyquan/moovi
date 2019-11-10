@@ -59,7 +59,8 @@ This was my second project at General Assembly's Software Engineering Immersive 
 * [TDMB](https://www.themoviedb.org/?language=en-US) - for their user-friendly API and incredible data
 
 ## Further Development
-* **Filters** - adding filters for movies (e.g. year 2000 onwards) to allow easier navigation
+* **Filters** - adding filters for movies (e.g. year 2000 onwards) to allow for easier navigation
+* **Reviews and Ratings** - adding a reviews and ratings section where users can post their reviews and rate the movies out of five stars.
 
 ## Screenshots
 
