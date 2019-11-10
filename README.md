@@ -2,7 +2,7 @@
 
 This project is a web app that allows users to make lists of actors, directors and movies, which can be shared with everyone or private. It utilises The Movie DB's API. Check out their awesome [website](https://www.themoviedb.org/?language=en-US).
 
-Feel free to test out my app [here](https://movies-lists-app.herokuapp.com/). Make sure to create an account to start making lists.
+Feel free to test out my app [here](https://moovi-app.herokuapp.com/). Make sure to create an account to start making lists.
 
 ## Motivation
 
