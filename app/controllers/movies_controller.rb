@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
   before_action :check_for_login, :only => [:add, :create, :edit, :update]
 
   def index
-    @movies = Movie.all.shuffle
+    @movies = Movie.all
   end
 
   def new
