@@ -105,7 +105,6 @@ puts "#{ Movie.count } movies created."
 
 Actor.destroy_all
 movies = Movie.all
-actor_count = 0;
 movies.each do |movie|
   movie_tmdb_id = movie["tmdb_id"]
   tmdb_key = Rails.application.secrets.tmdb_api_key
@@ -129,7 +128,6 @@ movies.each do |movie|
         new_actor.tmdb_id = actor_tmdb_id
         new_actor.image = ("https://image.tmdb.org/t/p/w600_and_h900_bestv2" + actor_details["profile_path"]) if actor_details["profile_path"].present?
         new_actor.save
-        actor_count += 1
         movie.actors << new_actor
         sleep(1)
       end
