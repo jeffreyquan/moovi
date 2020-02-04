@@ -1,53 +1,53 @@
 <h1>Results</h1>
-<% if !@movies_result.nil? %>
+<% if @movies_result.present? %>
 <h2 class="minor-top-buffer"><strong>Movies</strong></h2>
- <p class="search-number">Found <%= pluralize @movies_result.count, "results" %>.</p>
- <div class="board">
- <% @movies_result.each do |movie|%>
-   <div class="tile">
-     <div class="photo">
+<p class="search-number">Found <%= pluralize @movies_result.count, "results" %>.</p>
+<div class="board">
+  <% @movies_result.each do |movie|%>
+    <div class="tile">
+      <div class="photo">
         <%= link_to image_tag(movie.image, :class => "thumb", :alt => movie.title), movie if movie.image.present? %>
       </div>
     </div>
- <% end %>
+  <% end %>
 </div>
 <% else %>
-  <p>No movies were found.</p>
+<p>No movies were found.</p>
 <% end %>
 
-<% if !@actors_result.nil? %>
+<% if @actors_result.present? %>
 <h2 class="minor-top-buffer"><strong>Actors</strong></h2>
- <p class="search-number">Found <%= pluralize @actors_result.count, "results" %>.</p>
- <div class="board">
- <% @actors_result.each do |actor|%>
-   <div class="tile">
-     <div class="photo">
-        <%= link_to image_tag(actor.image, :class => "thumb", :alt => actor.name), actor if actor.image.present? %>
-      </div>
-      <div class="photo-name">
-        <%= link_to actor.name, actor_path(actor.id) %>
-      </div>
+<p class="search-number">Found <%= pluralize @actors_result.count, "results" %>.</p>
+<div class="board">
+<% @actors_result.each do |actor|%>
+  <div class="tile">
+    <div class="photo">
+      <%= link_to image_tag(actor.image, :class => "thumb", :alt => actor.name), actor if actor.image.present? %>
     </div>
-   <% end %>
+    <div class="photo-name">
+      <%= link_to actor.name, actor_path(actor.id) %>
+    </div>
+  </div>
+  <% end %>
 </div>
 <% else %>
-  <p>No actors were found.</p>
+<p>No actors were found.</p>
 <% end %>
 
-<% if !@directors_result.nil? %>
+<% if @directors_result.present? %>
 <h2 class="minor-top-buffer"><strong>Directors</strong></h2>
- <p class="search-number">Found <%= pluralize @directors_result.count, "results" %>.</p>
+<p class="search-number">Found <%= pluralize @directors_result.count, "results" %>.</p>
 <div class="board">
  <% @directors_result.each do |director|%>
-   <div class="tile">
-     <div class="photo">
-        <%= link_to image_tag(director.image, :class => "thumb", :alt => director.name), director if director.image.present? %>
+  <div class="tile">
+    <div class="photo">
+      <%= link_to image_tag(director.image, :class => "thumb", :alt => director.name), director if director.image.present? %>
+    </div>
+    <div class="photo-name">
+      <%= link_to director.name, director %>
       </div>
-      <div class="photo-name">
-        <%= link_to director.name, director %>
-       </div>
-   </div>
-   <% end %>
+  </div>
+  <% end %>
 <% else %>
-  <p>No directors were found.</p>
+<p>No directors were found.</p>
 <% end %>
