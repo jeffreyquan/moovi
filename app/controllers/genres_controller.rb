@@ -1,5 +1,5 @@
 class GenresController < ApplicationController
-  before_action :check_for_admin, :only => [:new, :edit, :update, :create, :destroy]
+  before_action :check_for_admin, :except => [:index, :show]
 
   def index
     @genres = Genre.all

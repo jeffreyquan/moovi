@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :check_for_login, :only => [:create, :new, :edit, :update, :destroy]
+  before_action :check_for_login, :except => [:index, :show]
 
   def index
     lists = List.where(:private => false)
