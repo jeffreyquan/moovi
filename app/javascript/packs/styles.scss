@@ -39,8 +39,12 @@ ul {
 }
 
 .navbar {
-  height: 10vh;
+  min-height: 10vh;
   padding: 0.5rem 1rem !important;
+}
+
+.dropdown-item {
+  font-size: 1.4rem;
 }
 
 .wrapper {
@@ -59,11 +63,6 @@ ul {
 .nav-link {
   font-size: 1.4rem;
   padding: 1rem 0;
-}
-
-.fixed-top {
-  width: 100rem;
-  margin: 0 auto;
 }
 
 .main-wrapper {
