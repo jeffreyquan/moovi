@@ -9,11 +9,3 @@ class User < ApplicationRecord
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }, :format => { with: /\A[a-zA-Z0-9]+\Z/ }
   validates :password, :presence => true, :length => { :minimum => 5, :maximum => 20 }
 end
-
-# class EmailValidator < ActiveModel::EachValidator
-#   def validate_each(record, attribute, value)
-#     unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-#       record.errors[attribute] << (options[:message] || "is not an email")
-#     end
-#   end
-# end
